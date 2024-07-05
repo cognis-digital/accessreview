@@ -37,3 +37,4 @@
 2026-02-14T08:40:20  chore: tune defaults
 2026-03-20T15:57:27  chore: NULLBYTE nightly sweep
 2024-06-17T14:38:58  perf(docs): make timestamps timezone-aware
+2024-07-05T09:55:05  build(rules): add usage examples to help
