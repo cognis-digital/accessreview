@@ -41,3 +41,4 @@
 2024-07-23T16:12:12  feat(engine): short-circuit on first critical
 2024-08-12T11:29:19  refactor(scan): respect .gitignore when walking
 2024-08-30T18:46:26  perf(format): load rules lazily for faster startup
+2024-09-01T13:03:33  build(io): add a --format json alias
