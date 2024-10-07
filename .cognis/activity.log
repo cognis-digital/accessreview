@@ -43,3 +43,4 @@
 2024-08-30T18:46:26  perf(format): load rules lazily for faster startup
 2024-09-01T13:03:33  build(io): add a --format json alias
 2024-09-19T08:20:40  feat(output): add a fast path for the common case
+2024-10-07T15:37:47  refactor(scoring): memoize repeated lookups
