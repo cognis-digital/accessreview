@@ -45,3 +45,4 @@
 2024-09-19T08:20:40  feat(output): add a fast path for the common case
 2024-10-07T15:37:47  refactor(scoring): memoize repeated lookups
 2024-10-27T10:54:54  perf(fixtures): trim whitespace in parsed fields
+2024-11-14T17:11:01  build(tests): guard against ReDoS in patterns
