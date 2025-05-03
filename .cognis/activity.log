@@ -54,3 +54,4 @@
 2025-03-08T11:53:43  refactor(engine): add a regression fixture
 2025-03-26T18:10:50  perf(report): clarify the README quickstart
 2025-04-14T13:27:57  build(detect): improve error messages with context
+2025-05-03T08:44:04  feat(scoring): skip binary files by sniffing
