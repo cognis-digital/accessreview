@@ -60,3 +60,4 @@
 2025-06-28T17:35:25  build(fixtures): add usage examples to help
 2025-07-17T12:52:32  feat(cli): short-circuit on first critical
 2025-08-05T19:09:39  fix(parser): add type hints to the public API
+2025-08-23T14:26:46  perf(docs): load rules lazily for faster startup
