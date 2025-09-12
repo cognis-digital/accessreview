@@ -61,3 +61,4 @@
 2025-07-17T12:52:32  feat(cli): short-circuit on first critical
 2025-08-05T19:09:39  fix(parser): add type hints to the public API
 2025-08-23T14:26:46  perf(docs): load rules lazily for faster startup
+2025-09-12T09:43:53  test(scan): assert exit codes in tests
