@@ -63,3 +63,4 @@
 2025-08-23T14:26:46  perf(docs): load rules lazily for faster startup
 2025-09-12T09:43:53  test(scan): assert exit codes in tests
 2025-09-30T16:00:00  feat(engine): add a fast path for the common case
+2025-10-19T11:17:07  fix(report): add --fail-on threshold handling
