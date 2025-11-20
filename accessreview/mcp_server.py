@@ -1,0 +1,22 @@
+"""ACCESSREVIEW MCP server — exposes scan() as an MCP tool for Cognis.Studio."""
+from __future__ import annotations
+from accessreview.core import scan, to_json
+
+def serve() -> int:
+    """Start an MCP stdio server. Requires the optional 'mcp' extra:
+        pip install "cognis-accessreview[mcp]"
+    """
+    try:
+        from mcp.server.fastmcp import FastMCP
+    except Exception:
+        print("Install the MCP extra: pip install 'cognis-accessreview[mcp]'")
+        return 1
+    app = FastMCP("accessreview")
+
+    @app.tool()
+    def accessreview_scan(target: str) -> str:
+        """Periodic user-access-review (UAR) campaign runner. Returns JSON findings."""
+        return to_json(scan(target))
+
+    app.run()
+    return 0
