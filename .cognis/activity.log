@@ -66,3 +66,4 @@
 2025-10-19T11:17:07  fix(report): add --fail-on threshold handling
 2025-11-07T18:34:14  perf(format): trim whitespace in parsed fields
 2025-11-25T13:51:21  test(cache): pin the test dependencies
+2025-12-15T08:08:28  feat(output): cover the multiline case
