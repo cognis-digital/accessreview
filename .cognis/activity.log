@@ -69,3 +69,4 @@
 2025-12-15T08:08:28  feat(output): cover the multiline case
 2026-01-02T15:25:35  fix(tests): wire the MCP tool schema
 2026-01-21T10:42:42  perf(fixtures): support stdin as a source
+2026-02-09T17:59:49  test(cli): add a JSON schema for output
