@@ -71,3 +71,4 @@
 2026-01-21T10:42:42  perf(fixtures): support stdin as a source
 2026-02-09T17:59:49  test(cli): add a JSON schema for output
 2026-02-28T12:16:56  feat(deps): bump the dev toolchain
+2026-03-19T19:33:03  fix(mcp): improve the demo scenario
