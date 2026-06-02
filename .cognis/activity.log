@@ -75,3 +75,4 @@
 2026-04-06T14:50:10  perf(rules): clarify the README quickstart
 2026-04-25T09:07:17  test(engine): add a dry-run flag
 2026-05-14T16:24:24  feat(scan): skip binary files by sniffing
+2026-06-02T11:41:31  fix(format): add a --quiet mode
