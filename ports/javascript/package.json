@@ -1,0 +1,10 @@
+{
+  "name": "@cognis/accessreview",
+  "version": "0.2.0",
+  "description": "JavaScript port of accessreview (Cognis Neural Suite)",
+  "bin": {
+    "accessreview": "index.js"
+  },
+  "license": "LicenseRef-COCL-1.0",
+  "type": "module"
+}
