@@ -36,9 +36,9 @@ SOC 2 access reviews
 <a name="features"></a>
 ## Features
 
-- ✅ Todo
-- ✅ Fixme
-- ✅ Xxx
+- ✅ Load Entitlements
+- ✅ Load Roster
+- ✅ Build Campaign
 - ✅ Runs on Linux/macOS/Windows · Docker · devcontainer
 - ✅ Ports in Python, JavaScript, Go, and Rust (`ports/`)
 
