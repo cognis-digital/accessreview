@@ -1,0 +1,6 @@
+user_id,user_name,department,manager,status,title
+u_alice,Alice Ng,Finance,m_finance,active,AP Specialist
+u_bob,Bob Reyes,Engineering,m_eng,active,Software Engineer
+u_carol,Carol Smith,Sales,m_sales,terminated,Sales Director
+u_dave,Dave Okoro,Engineering,m_eng,active,Staff Engineer
+u_erin,Erin Patel,Marketing,,leave,Content Lead
