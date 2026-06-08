@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: { name: accessreview, labels: { app: accessreview } }
+spec:
+  replicas: 1
+  selector: { matchLabels: { app: accessreview } }
+  template:
+    metadata: { labels: { app: accessreview } }
+    spec:
+      containers:
+        - name: accessreview
+          image: ghcr.io/cognis-digital/accessreview:latest
+          ports: [{ containerPort: 8000 }]
+          resources:
+            requests: { cpu: "50m", memory: "64Mi" }
+            limits: { cpu: "500m", memory: "256Mi" }
+---
+apiVersion: v1
+kind: Service
+metadata: { name: accessreview }
+spec:
+  selector: { app: accessreview }
+  ports: [{ port: 80, targetPort: 8000 }]
