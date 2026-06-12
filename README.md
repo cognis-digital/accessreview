@@ -16,7 +16,7 @@
 </div>
 
 ```bash
-pip install cognis-accessreview
+pip install "git+https://github.com/cognis-digital/accessreview.git"
 accessreview scan .            # → prioritized findings in seconds
 ```
 
@@ -48,7 +48,7 @@ SOC 2 access reviews
 ## Quick start
 
 ```bash
-pip install cognis-accessreview
+pip install "git+https://github.com/cognis-digital/accessreview.git"
 accessreview --version
 accessreview scan .                       # scan current project
 accessreview scan . --format json         # machine-readable
