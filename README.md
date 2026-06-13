@@ -20,6 +20,12 @@ pip install "git+https://github.com/cognis-digital/accessreview.git"
 accessreview scan .            # → prioritized findings in seconds
 ```
 
+<!-- cognis:layman:start -->
+## What is this?
+
+accessreview helps your team stay on top of who has access to what in your systems. You give it a list of current user permissions and an employee roster, and it automatically flags people who should no longer have access — like terminated employees, accounts no one uses anymore, or users holding conflicting roles. It produces a prioritized action list (certify or revoke) so your security or compliance team can work through access reviews quickly instead of combing through spreadsheets by hand. It is built for IT admins, compliance officers, and security teams running periodic user-access-review (UAR) audits required by frameworks like SOC 2.
+<!-- cognis:layman:end -->
+
 ## Contents
 
 - [Why accessreview?](#why) · [Features](#features) · [Quick start](#quick-start) · [Example](#example) · [Architecture](#architecture) · [AI stack](#ai-stack) · [How it compares](#how-it-compares) · [Integrations](#integrations) · [Install anywhere](#install-anywhere) · [Related](#related) · [Contributing](#contributing)
@@ -45,6 +51,42 @@ SOC 2 access reviews
 <div align="right"><a href="#top">↑ back to top</a></div>
 
 <a name="quick-start"></a>
+<!-- cognis:install:start -->
+## Install
+
+`accessreview` is source-available (not published to PyPI) — every method below installs
+straight from GitHub. Pick whichever you prefer; the one-line scripts auto-detect
+the best tool available on your machine.
+
+**One-liner (Linux / macOS):**
+```sh
+curl -fsSL https://raw.githubusercontent.com/cognis-digital/accessreview/HEAD/install.sh | sh
+```
+
+**One-liner (Windows PowerShell):**
+```powershell
+irm https://raw.githubusercontent.com/cognis-digital/accessreview/HEAD/install.ps1 | iex
+```
+
+**Or install manually — any one of:**
+```sh
+pipx install "git+https://github.com/cognis-digital/accessreview.git"     # isolated (recommended)
+uv tool install "git+https://github.com/cognis-digital/accessreview.git"  # uv
+pip install "git+https://github.com/cognis-digital/accessreview.git"      # pip
+```
+
+**From source:**
+```sh
+git clone https://github.com/cognis-digital/accessreview.git
+cd accessreview && pip install .
+```
+
+Then run:
+```sh
+accessreview --help
+```
+<!-- cognis:install:end -->
+
 ## Quick start
 
 ```bash
