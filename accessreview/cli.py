@@ -14,7 +14,6 @@ from __future__ import annotations
 import argparse
 import json
 import sys
-from datetime import date
 from typing import List, Optional
 
 from . import TOOL_NAME, TOOL_VERSION
