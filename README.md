@@ -20,6 +20,32 @@ pip install cognis-accessreview
 accessreview scan .            # → prioritized findings in seconds
 ```
 
+## Usage — step by step
+
+`accessreview` runs a periodic user-access-review (UAR) campaign from an entitlements snapshot. Console script: `accessreview`.
+
+1. **Install** (zero runtime deps, stdlib only):
+   ```bash
+   pipx install accessreview     # or: pip install accessreview
+   ```
+2. **Run a full campaign** from an entitlements snapshot (JSON or CSV), optionally enriched with an HR roster:
+   ```bash
+   accessreview run entitlements.json --roster roster.csv --as-of 2026-06-12 --stale-days 90
+   ```
+   Prints a per-grant table (ACTION / RISK / USER / SYSTEM / ROLE / PRV / FINDINGS). Exits `1` if any grant is recommended for revocation (use as an audit gate).
+3. **Emit just the revocation work-list** for ticket creation:
+   ```bash
+   accessreview revoke entitlements.json --roster roster.csv
+   ```
+4. **Read the output as JSON** for dashboards or piping (the `--format` flag is global, before the subcommand):
+   ```bash
+   accessreview --format json summary entitlements.json | jq '.summary.clean_pct'
+   ```
+5. **Wire it into CI** — fail the pipeline when stale or orphaned grants appear:
+   ```bash
+   accessreview run entitlements.json --roster roster.csv || echo "UAR flagged grants for revocation"
+   ```
+
 ## Contents
 
 - [Why accessreview?](#why) · [Features](#features) · [Quick start](#quick-start) · [Example](#example) · [Architecture](#architecture) · [AI stack](#ai-stack) · [How it compares](#how-it-compares) · [Integrations](#integrations) · [Install anywhere](#install-anywhere) · [Related](#related) · [Contributing](#contributing)
