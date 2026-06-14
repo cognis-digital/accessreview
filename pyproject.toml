@@ -34,3 +34,6 @@ accessreview = "accessreview.cli:main"
 
 [tool.hatch.build.targets.wheel]
 packages = ["accessreview"]
+
+[tool.hatch.metadata]
+allow-direct-references = true
