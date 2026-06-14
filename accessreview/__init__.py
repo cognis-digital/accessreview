@@ -1,11 +1,15 @@
 """accessreview — part of the Cognis Neural Suite."""
-try:  # re-export the tool's public API + identity from core
-    from accessreview.core import *  # noqa: F401,F403
-except Exception:  # pragma: no cover
-    pass
-try:
-    from accessreview.core import TOOL_NAME, TOOL_VERSION
-except Exception:  # pragma: no cover
-    TOOL_NAME = "accessreview"
-    TOOL_VERSION = "0.1.0"
+from accessreview.core import (  # noqa: F401
+    TOOL_NAME,
+    TOOL_VERSION,
+    build_campaign,
+    load_entitlements,
+    load_roster,
+    Campaign,
+    ReviewItem,
+    Finding,
+    Entitlement,
+    Person,
+)
+
 __version__ = TOOL_VERSION

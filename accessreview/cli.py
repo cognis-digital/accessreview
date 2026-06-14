@@ -35,7 +35,22 @@ def _build(args) -> object:
     roster = None
     if args.roster:
         roster = load_roster(_read_file(args.roster), args.roster)
-    as_of = _parse_date(args.as_of) if args.as_of else None
+    as_of = None
+    if args.as_of:
+        as_of = _parse_date(args.as_of)
+        if as_of is None:
+            print(
+                f"error: --as-of value {args.as_of!r} is not a recognisable date "
+                "(expected YYYY-MM-DD)",
+                file=sys.stderr,
+            )
+            raise SystemExit(2)
+    if args.stale_days <= 0:
+        print(
+            f"error: --stale-days must be a positive integer, got {args.stale_days}",
+            file=sys.stderr,
+        )
+        raise SystemExit(2)
     return build_campaign(
         ents,
         roster,
@@ -134,10 +149,17 @@ def main(argv: Optional[List[str]] = None) -> int:
     args = parser.parse_args(argv)
     try:
         campaign = _build(args)
+    except SystemExit as exc:
+        code = exc.code
+        return int(code) if isinstance(code, int) else 2
     except FileNotFoundError as exc:
-        print(f"error: file not found: {exc.filename}", file=sys.stderr)
+        filename = getattr(exc, "filename", None) or str(exc)
+        print(f"error: file not found: {filename}", file=sys.stderr)
         return 2
     except (ValueError, json.JSONDecodeError) as exc:
+        print(f"error: {exc}", file=sys.stderr)
+        return 2
+    except Exception as exc:  # unexpected I/O or encoding error
         print(f"error: {exc}", file=sys.stderr)
         return 2
 

@@ -24,6 +24,12 @@ from dataclasses import dataclass, field, asdict
 from datetime import date, datetime
 from typing import Any, Dict, List, Optional, Tuple
 
+
+# ----- Package identity ----------------------------------------------------
+
+TOOL_NAME = "accessreview"
+TOOL_VERSION = "0.1.0"
+
 # ----- Default policy knobs ------------------------------------------------
 
 STALE_DAYS_DEFAULT = 90          # access unused for >= N days is "stale"
@@ -177,29 +183,63 @@ class Campaign:
 
 def _read_records(text: str, path_hint: str = "") -> List[Dict[str, Any]]:
     """Parse JSON (array or {"items":[...]}) or CSV into list of dicts."""
+    if not text or not text.strip():
+        return []
     stripped = text.lstrip()
     if stripped.startswith("{") or stripped.startswith("[") or path_hint.endswith(".json"):
-        data = json.loads(text)
+        try:
+            data = json.loads(text)
+        except json.JSONDecodeError as exc:
+            raise ValueError(f"invalid JSON: {exc}") from exc
         if isinstance(data, dict):
             for key in ("items", "entitlements", "grants", "roster", "records", "data"):
                 if key in data and isinstance(data[key], list):
                     return data[key]
-            raise ValueError("JSON object has no recognized list field")
+            raise ValueError(
+                "JSON object has no recognized list field "
+                "(expected one of: items, entitlements, grants, roster, records, data)"
+            )
         if isinstance(data, list):
             return data
-        raise ValueError("unsupported JSON shape")
+        raise ValueError(
+            f"unsupported JSON shape: expected array or object, got {type(data).__name__}"
+        )
     # CSV
     reader = csv.DictReader(io.StringIO(text))
+    if reader.fieldnames is None:
+        return []
     return [dict(row) for row in reader]
 
 
 def load_entitlements(text: str, path_hint: str = "") -> List[Entitlement]:
-    return [Entitlement.from_dict(r) for r in _read_records(text, path_hint)]
+    records = _read_records(text, path_hint)
+    result: List[Entitlement] = []
+    for idx, r in enumerate(records):
+        if not isinstance(r, dict):
+            raise ValueError(
+                f"entitlement row {idx}: expected a mapping, got {type(r).__name__}"
+            )
+        try:
+            result.append(Entitlement.from_dict(r))
+        except ValueError as exc:
+            raise ValueError(f"entitlement row {idx}: {exc}") from exc
+    return result
 
 
 def load_roster(text: str, path_hint: str = "") -> Dict[str, Person]:
-    people = [Person.from_dict(r) for r in _read_records(text, path_hint)]
-    return {p.user_id: p for p in people}
+    records = _read_records(text, path_hint)
+    result: Dict[str, Person] = {}
+    for idx, r in enumerate(records):
+        if not isinstance(r, dict):
+            raise ValueError(
+                f"roster row {idx}: expected a mapping, got {type(r).__name__}"
+            )
+        try:
+            person = Person.from_dict(r)
+        except ValueError as exc:
+            raise ValueError(f"roster row {idx}: {exc}") from exc
+        result[person.user_id] = person
+    return result
 
 
 # ----- Engine --------------------------------------------------------------
@@ -225,6 +265,12 @@ def build_campaign(
     """
     roster = roster or {}
     as_of = as_of or date.today()
+    if not isinstance(stale_days, int) or stale_days <= 0:
+        raise ValueError(f"stale_days must be a positive integer, got {stale_days!r}")
+    if not isinstance(stale_days_privileged, int) or stale_days_privileged <= 0:
+        raise ValueError(
+            f"stale_days_privileged must be a positive integer, got {stale_days_privileged!r}"
+        )
     sod = _normalize_pairs(sod_pairs if sod_pairs is not None else DEFAULT_SOD_PAIRS)
 
     # roles held per user (lowercased) for SoD evaluation
